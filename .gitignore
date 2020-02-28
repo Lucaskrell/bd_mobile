@@ -1,5 +1,4 @@
 .idea/
 *.phar
-*.json
 vendor/*
 *.lock
