@@ -10,6 +10,6 @@ class Character extends \Illuminate\Database\Eloquent\Model
     public $incrementing = false;
 
     public function games() {
-        return $this->belongsToMany('gamepedia\models\Game','game2character','character_id','game_id');
+        return $this->belongsToMany('mobileorm\models\Game','game2character','character_id','game_id');
     }
 }

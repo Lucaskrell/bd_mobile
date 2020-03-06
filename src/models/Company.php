@@ -12,10 +12,10 @@ class Company extends \Illuminate\Database\Eloquent\Model
     public $incrementing = false;
 
     public function games_dev() {
-        return $this->belongsToMany('gamepedia\models\Game','game_developers','comp_id','game_id')->as('developers');
+        return $this->belongsToMany('mobileorm\models\Game','game_developers','comp_id','game_id')->as('developers');
     }
 
     public function games_pub() {
-        return $this->belongsToMany('gamepedia\models\Game','game_publishers','comp_id','game_id')->as('publishers');
+        return $this->belongsToMany('mobileorm\models\Game','game_publishers','comp_id','game_id')->as('publishers');
     }
 }
