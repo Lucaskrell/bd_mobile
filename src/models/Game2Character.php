@@ -8,11 +8,11 @@ class Game2Character extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false ;
     public $incrementing = false;
 
-    function games() {
+    public function games() {
         return $this->hasMany('mobileorm\models\Game', 'id');
     }
 
-    function characters() {
+    public function characters() {
         return $this->hasMany('mobileorm\models\Character', 'id');
     }
 }
