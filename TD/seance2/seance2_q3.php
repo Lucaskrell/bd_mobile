@@ -10,6 +10,8 @@ $db->addConnection(parse_ini_file('../../src/conf/conf.ini'));
 $db->setAsGlobal();
 $db->bootEloquent();
 
+echo '<pre>';
+
 $comp = Company::where("name", "like","%sony%")->get();
 
 foreach ($comp as $c) {
