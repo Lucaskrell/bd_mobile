@@ -9,7 +9,9 @@ $db->addConnection(parse_ini_file('src/conf/conf.ini'));
 $db->setAsGlobal();
 $db->bootEloquent();
 
-$r = \mobileorm\models\Game2Character::select('name','deck')->characters()->where('id_game', '=', '12342')->get();
+echo '<pre>';
+
+$r = \mobileorm\models\Game::find(12342)->characters()->get();
 
 foreach($r as $value) {
     echo 'nom : '.$value->name.'<br>';
