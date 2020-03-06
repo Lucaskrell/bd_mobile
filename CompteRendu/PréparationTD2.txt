@@ -1,0 +1,50 @@
+2)
+1) 
+Categorie(PK id, nom, descr)
+Annonce(PK id, titre, date, texte)
+Photo(PK id,file,date,taille_Octet, FK  Annonce_id)
+AnnonceCateg( PK Annonce_id, PK Categ_id
+
+2
+namespace yo 
+ Annonce :
+
+public function Photo(){
+ return $this->hasMany('yo\Photo','Annonce_id');
+}
+
+public function Categorie(){
+ return $this->belongsToMany('yo\Categorie','AnnonceCateg', 'Annonces_id', 'Categorie_id');
+}
+
+
+Photo :
+
+public function Annonce(){
+ return $this-> belongsTo('yo\Annonce','Annonce_id');
+}
+
+3)
+1) $q1 = Annonce::where('id', '=', '22')->first()        
+    $q1->photos()->get();
+
+
+2) $q1->photos()->where('taille_octet','>','100000);
+   ->get();
+
+ 3) Annonce::has('photo','>', 3) -> get();
+ 4) Annonce::wherehas('photo',function($q){
+   $q->where('taille', '>', '100000')
+ })->get();
+
+
+
+4) $photo = new Photos();
+   $photo->file=$file;
+   $photo->date =$date
+   $photo->taille_octet = filesize($file)
+   $annonce->photos()->save($photo);
+5)
+$annonce22 = annonce::where('id','=','=22')->first();
+$annonce22 -> Categorie()->attache([42,73]); 
+-> save;
