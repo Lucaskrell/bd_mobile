@@ -1,0 +1,70 @@
+1)
+Categorie {
+	-id PK,
+	-nom,
+	-descr
+};
+
+Annonce {
+	-id PK,
+	-titre,
+	-date,
+	-texte
+};
+
+Photo {
+	-id PK,
+	-file,
+	-date,
+	-taille_octet,
+	-idPhoto # clef etrangère
+};
+
+Annonce_Categorie {
+	idCategorie,
+	idAnnonce
+}
+2)
+Dans le modèle Photo, il faut définir la méthode :
+public function annonce() {
+	return $this->belongsTo('modele\Annonce','id_annonce');
+}
+
+Dans le modèle Annonce,il faut définir les méthodes :
+public function photo() {
+	return $this->hasMany('modele\Photo','id_photo');
+}
+
+public function categorie() {
+	return $this->hasMany('modele\Categorie','id_categorie');
+}
+
+Dans le modèle Categorie, il faut définir la méthide :
+public function annonce() {
+	return $this->hasMany('modele\Annonce','id_annonce');
+}
+
+3)
+3.1)
+	$a = Annonce::find(22);
+	$photos = $a->photo()->get();
+3.2)
+	$a = Annonce::find(22);
+	$photos = $a->photo()
+		    ->where('taille_octet','>','100000')
+		    ->get();
+3.3)
+	$a = Annonce::where('count($photos = Annonce->with('photo')->get()','>','3');
+3.4)
+	$a = Annonce::$photos = Annonce->with('photo')->where('taille_octet','>','100000')->get();
+4)
+	$photo = new Photo();
+	$photo->date='26/02/2020';
+	$annonce22 = Annonce::find(22);
+	$annonce22->photo()->save($photo);
+5)
+	$photo = new Photo();
+	$photo->date='26/02/2020';
+	$annonce22 = Annonce::find(22);
+	$annonce22->photo()->save($photo);
+	$annonce22->categorie()->attach([42,73]);
