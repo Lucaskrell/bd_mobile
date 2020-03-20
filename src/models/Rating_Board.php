@@ -13,6 +13,6 @@ class Rating_Board extends \Illuminate\Database\Eloquent\Model
 
 
     public function gameR2ratB(){
-        return $this->hasMany('gamepedia\models\Game_Rating', 'id');
+        return $this->hasMany('mobileorm\models\Game_Rating', 'id');
     }
 }

@@ -1,0 +1,13 @@
+Comment s'installe Faker ?
+
+composer require fzaninotto/faker
+
+
+Donnez un exemple de code pour générer une adresse américaine en utilisant faker ?
+
+Modèle utilisé : Faker\Provider\en_US\Address
+echo $faker->address;
+Résultat --> "426 Jordy Lodge Cartwrightshire, SC 88120-6700"
+
+Formattez une date en type DateTime : "2017/02/16 (16:15)" ?
+$faker->dateTime()->format('Y-m-d')->format('H:i');

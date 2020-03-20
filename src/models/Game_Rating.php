@@ -15,11 +15,11 @@ class Game_Rating extends \Illuminate\Database\Eloquent\Model
     ];
 
     public function original_game_ratings(){
-        return $this->belongsToMany('gamepedia\models\Game', "game2rating", 'rating_id', 'game_id');
+        return $this->belongsToMany('mobileorm\models\Game', "game2rating", 'rating_id', 'game_id');
     }
 
     public function gameR2ratB(){
-        return $this->belongsTo('gamepedia\models\Rating_Board', 'id');
+        return $this->belongsTo('mobileorm\models\Rating_Board', 'id');
     }
 
 }
