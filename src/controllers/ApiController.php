@@ -21,8 +21,7 @@ class ApiController {
     }
 
     public function games(Request $request, Response $response, array $args): Response {
-        $games = Game::all()->take(200);
-        $games = ["games" => $games];
+        $games = ["games" => Game::all()->take(200)];
         $response = $response->withJson($games);
         return $response;
     }
