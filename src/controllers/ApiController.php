@@ -20,4 +20,10 @@ class ApiController {
         return $response;
     }
 
+    public function games(Request $request, Response $response, array $args): Response {
+        $games = Game::all()->take(200);
+        $games = ["games" => $games];
+        $response = $response->withJson($games);
+        return $response;
+    }
 }

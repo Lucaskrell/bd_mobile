@@ -20,5 +20,6 @@ $config = [
 $app = new App($config);
 
 $app->get('/api/games/{id:[0-9]+}', ApiController::class . ":game")->setName('game');
+$app->get('/api/games', ApiController::class . ":games")->setName('games');
 
 $app->run();
