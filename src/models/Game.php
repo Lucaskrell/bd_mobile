@@ -31,4 +31,8 @@ class Game extends \Illuminate\Database\Eloquent\Model
     public function original_game_ratings(){
         return $this->belongsToMany('mobileorm\models\Game_Rating', "game2rating", 'game_id', 'rating_id');
     }
+
+    public function comments(){
+        return $this->hasMany('mobileorm\models\Comment', 'id_game');
+    }
 }

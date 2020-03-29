@@ -4,6 +4,7 @@ namespace mobileorm\controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use mobileorm\models\Character;
+use mobileorm\models\Comment;
 use mobileorm\models\Game;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -84,14 +85,46 @@ class ApiController
 
     public function comments(Request $request, Response $response, array $args): Response
     {
+        try {
+            $id = $args['id'];
+            $game = Game::findOrFail($id);
+            $comments = $game->comments;
 
+            foreach($comments as $comment){
+                $user = $comment->user;
+                $res["comments"][] = [
+                    "id" => $comment->id,
+                    "title" => $comment->title,
+                    "content" => $comment->content,
+                    "created_at" => $comment->created_at,
+                    "user" => $user->name.' '.$user->first_name
+                ];
+            }
+            $response = $response->withJson($res);
+        } catch (ModelNotFoundException $e) {
+            $response = $response->withJson(static::$error, 404);
+        }
+        return $response;
+    }
+
+    public function sendComments(Request $request, Response $response, array $args)
+    {
+        $params = $request->getParsedBody();
+
+        $comment = new Comment();
+        $comment->email = filter_var($params['email'], FILTER_SANITIZE_EMAIL);
+        $comment->id_game = $args['id'];
+        $comment->title = filter_var($params['title'], FILTER_SANITIZE_STRING);
+        $comment->content = filter_var($params['content'], FILTER_SANITIZE_STRING);
+
+        $comment->save();
     }
 
     public function gameCharacters(Request $request, Response $response, array $args): Response
     {
         try {
             $id = $args['id'];
-            $characters = Game::findOrFail($id)->characters()->get();
+            $characters = Game::findOrFail($id)->characters;
 
             foreach ($characters as $c) {
                 $res["characters"] = [
